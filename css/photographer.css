@@ -236,6 +236,7 @@ function extrait(txt, pos) {
     height: 19rem;
     object-fit: cover;
     border-radius: 5px;
+    margin: 1,5rem;
 }
 
 .card_text {
@@ -243,13 +244,12 @@ function extrait(txt, pos) {
     align-items: flex-start;
     justify-content: space-between;
     color : red;
-    background-color: pink;
-
 }
 .media_coeur {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
 }
 .heart{
     align-items: center;
