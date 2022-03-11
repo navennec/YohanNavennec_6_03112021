@@ -15,10 +15,11 @@ fetch("../../data/photographers.json")
       if (photographer.id == id) {
         let cardPhotographer = document.querySelector(".photograph-header");
 
-        cardPhotographer.innerHTML = ` <h1 class="photographer__h1">${photographer.name}</h1>
+        cardPhotographer.innerHTML = ` <div photographer_info> <h1 class="photographer__h1">${photographer.name}</h1>
         <h2>${photographer.city}, ${photographer.country}</h2>
         <p>${photographer.tagline}</p>
-        <button class="contact_button">contactez-moi</button>
+        </div>
+        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
         <img class="photoProfil" src="../../Sample Photos/Photographers ID Photos/${photographer.portrait}">
         `;
       }
@@ -32,20 +33,63 @@ fetch("../../data/photographers.json")
         /* a completer */
         mediaDiv.innerHTML = `
         <div class="cardInfos">
-        <img class="cardImage">  
-        <img class="photographerWork" src="../../Sample Photos/${media.photographerId}/${media.image}">  
+        
+        ${choix_media(media)}
+        <div class="card_text">
+        <p>${media.title}</p>
+        <div class="media_coeur">
         <p>${media.likes}</p>
         <div class="heart">
+    
         <i  onclick = "clickLike" class="far fa-heart"></i>
         </div>
         </div>
+        </div>
+        </div>
         `;
-
         /* a completer */
         photographerImages.appendChild(mediaDiv);
       }
     });
   });
+/*.    Avant ligne 36 à la place de choix medi..       <img class="photographerWork" src="../../Sample Photos/${media.photographerId}/${media.image}">  */
+function choix_media(media) {
+  if (media.image) {
+    return ` <img class="photographerWork" src="../../Sample Photos/${media.photographerId}/${media.image}">`;
+  } else if (media.video) {
+    return ` <video class="photographerWork">
+      < source src="../../Sample Photos/${media.photographerId}/${media.video}" type=video/mp4>
+      </video>`;
+  }
+}
+
+/*. function de vincent pour choix image ou video
+
+
+  function choix_media(Elmedia) {
+    if (Elmedia.image) {
+      return (
+        '<img class="media" src="' +
+        Elmedia.image +
+        '" alt="' +
+        Elmedia.alt +
+        '"img>'
+      );
+    } else if (Elmedia.video) {
+      return (
+        '<video class="media">' +
+        '<source src="' +
+        Elmedia.video +
+        '" alt="' +
+        Elmedia.alt +
+        '" type=video/mp4>' +
+        '</video> '
+      );
+    }
+  }*
+
+  */
+
 /* Ajouter les catres photos en HTML si il y a des photos corespondantes 
 à l'ID dans photographers.JASON */
 
