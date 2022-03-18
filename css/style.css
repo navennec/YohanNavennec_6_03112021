@@ -92,5 +92,7 @@ h2 {
     font-size: small;
 
 }
-???
-
+.mediaTitle {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}

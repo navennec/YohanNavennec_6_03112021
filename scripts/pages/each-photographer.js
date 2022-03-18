@@ -36,13 +36,11 @@ fetch("../../data/photographers.json")
         
         ${choix_media(media)}
         <div class="card_text">
-        <p>${media.title}</p>
+        <p class="mediaTitle">${media.title}</p>
         <div class="media_coeur">
-        <p>${media.likes}</p>
-        <div class="heart">
+        <p class="mediaTitle">${media.likes}</p>
     
-        <i  onclick = "clickLike" class="far fa-heart"></i>
-        </div>
+        <i  onclick = "clickLike" class="far fa-heart heart"></i>
         </div>
         </div>
         </div>
@@ -58,10 +56,32 @@ function choix_media(media) {
     return ` <img class="photographerWork" src="../../Sample Photos/${media.photographerId}/${media.image}">`;
   } else if (media.video) {
     return ` <video class="photographerWork">
-      < source src="../../Sample Photos/${media.photographerId}/${media.video}" type=video/mp4>
+      <source src="../../Sample Photos/${media.photographerId}/${media.video}" type="video/mp4">
       </video>`;
   }
 }
+
+/* +++++++. 14 mars à faire pour la prochaine ++++++
+Incrementer les likes
+
+faire une variables qui recupere le nombre de likes dans le JSON (media.like)
+
+let 
+medias.forEach((media) => {
+      if (media.photographerId == id) {
+       ajouter le nombre de likes et l'ajouter
+la lightBox
+compteur de likes globales en bas a droite
+le mettre en element fixé en bas de la page avec les regles de position
+ 
+pour la modal contactez moi avec les regles de position pour etre toujours en haut de l'ecran 
+voire doc position pour retirer du flux avec un fixed
+
+styliser "un peu" le filtre popularité
+
+
+
+
 
 /*. function de vincent pour choix image ou video
 
@@ -157,3 +177,15 @@ photographerImages
 mettre des classes dans le HTML pour y mettre du StyleSheet
 mettre la modale contactez moi.
 */
+
+/* 15 03 2022 essayer d incrementer le nommbre de like des coeur */
+
+/*function clickJaime(id) {
+  tableau_medias.forEach((addLike) => {
+    if (addLike.id == id) {
+      addLike.likes += 1;
+      document.getElementById(id).innerHTML = addLike.likes;
+    }
+  });
+  totalLikes(tableau_medias);
+  */
