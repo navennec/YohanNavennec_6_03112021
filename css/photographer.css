@@ -51,6 +51,12 @@ button {
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+   /* pour faire passer la modal en haut au 1er plan 
+   position: fixed;
+    z-index: 0; */
+    position: fixed;
+    top: 0px; left: 25%;
+    z-index: 1;
 }
 
 .modal header {
@@ -210,6 +216,8 @@ photographer.city{
     margin-bottom: 25px;
   }
   ???
+
+}
 /* Modal */
 /*
 Soit texte la variable qui contient la chaîne de caractère et la variable position qui contient la position à partir de laquelle il faut extraire le reste de la chaine de caractères.
@@ -252,8 +260,36 @@ function extrait(txt, pos) {
     color: #901c1c;
     margin-top: 2px;
     margin-left: 5px;
+}
+.photographer__selectOption--wraper{
+    background-color: #901c1c;
+    color: #FAFAFA;
+    height: 45px;
+    padding: 10px;
+    margin: 20px;
+}
+.lightbox {
+    /*display: none;*/
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    top: 0px;
+    left: 0px;
 
+}
+.img-lightbox {
+    object-fit: cover;
+    width: 450px;
+    height: 450px;
 
+}
+.fa-angle-left {
 
-
+}
+.fa-arrows-cross {
+    width: 16px;
+    height: 16px;
+    color: blue;
+    background-color: red;
 }

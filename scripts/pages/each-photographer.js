@@ -24,6 +24,27 @@ fetch("../../data/photographers.json")
         `;
       }
     });
+    /*
+    Sélectionner la lightbox et la remettre en display visible
+
+Récupérer la src de l'image cliquée avec e.target.getAttribute (e étant l'event du listener)
+
+Sélectionner l'image de la lightbox pour lui mettre la src récupérée (avec setAttribute)
+Pour la lightbox, un des moyens les plus simples c'est de faire comme une modale. 
+En gros dans l'html  j'écris tout le code, la balise avec l'img qui sont au centre de la page
+ en gros mais je mets tout ça en display none.
+
+Lorsque tu cliques sur une image (donc il faut mettre un eventlistener), tu récupères le src de l'image cliquée : e.target.getAttribute("src")
+
+Une fois fait, tu sélectionnes l'image de la lightbox et tu lui changes sa src pour mettre celle de l'image cliquée (avec setAttribute cette fois)
+
+Ensuite tu remets en display visible pour que la lightbox s'affiche et le tour est joué
+
+Il faut aussi faire le compteur de likes global.
+
+    */
+    /*  faire une lightbox*/
+
     medias.forEach((media) => {
       if (media.photographerId == id) {
         let photographerImages = document.querySelector(".photographerImages");
@@ -38,9 +59,9 @@ fetch("../../data/photographers.json")
         <div class="card_text">
         <p class="mediaTitle">${media.title}</p>
         <div class="media_coeur">
-        <p class="mediaTitle">${media.likes}</p>
-    
-        <i  onclick = "clickLike" class="far fa-heart heart"></i>
+        <p class="mediaTitle">${
+          media.likes
+        }</p><i class="far fa-heart heart"></i>
         </div>
         </div>
         </div>
@@ -49,7 +70,27 @@ fetch("../../data/photographers.json")
         photographerImages.appendChild(mediaDiv);
       }
     });
+    let addLike = document.querySelectorAll(".heart");
+    addLike.forEach((coeur) => {
+      coeur.addEventListener("click", (e) => {
+        let compteur = e.target.previousSibling;
+        console.log(e);
+        let likeAdded = parseInt(compteur.innerText) + 1;
+        console.log(compteur);
+        compteur.innerText = likeAdded;
+      });
+    });
+
+    let photos = document.querySelectorAll(".media");
+    photos.forEach((photo) => {
+      photo.addEventListener("click", (e) => {
+        let lightbox = document.querySelector(".lightbox)");
+
+        /* !! passer lightbox en visible et recuperer le SRC de l'img avec les get Atribute*/
+      });
+    });
   });
+
 /*.    Avant ligne 36 à la place de choix medi..       <img class="photographerWork" src="../../Sample Photos/${media.photographerId}/${media.image}">  */
 function choix_media(media) {
   if (media.image) {
@@ -61,6 +102,8 @@ function choix_media(media) {
   }
 }
 
+/* function ++ click */
+
 /* +++++++. 14 mars à faire pour la prochaine ++++++
 Incrementer les likes
 
@@ -70,6 +113,8 @@ let
 medias.forEach((media) => {
       if (media.photographerId == id) {
        ajouter le nombre de likes et l'ajouter
+
+
 la lightBox
 compteur de likes globales en bas a droite
 le mettre en element fixé en bas de la page avec les regles de position
@@ -83,32 +128,7 @@ styliser "un peu" le filtre popularité
 
 
 
-/*. function de vincent pour choix image ou video
 
-
-  function choix_media(Elmedia) {
-    if (Elmedia.image) {
-      return (
-        '<img class="media" src="' +
-        Elmedia.image +
-        '" alt="' +
-        Elmedia.alt +
-        '"img>'
-      );
-    } else if (Elmedia.video) {
-      return (
-        '<video class="media">' +
-        '<source src="' +
-        Elmedia.video +
-        '" alt="' +
-        Elmedia.alt +
-        '" type=video/mp4>' +
-        '</video> '
-      );
-    }
-  }*
-
-  */
 
 /* Ajouter les catres photos en HTML si il y a des photos corespondantes 
 à l'ID dans photographers.JASON */
