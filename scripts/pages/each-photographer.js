@@ -1,3 +1,15 @@
+//-------------VARIABLES LIGHTBOX--------------------------------
+const bg_lightbox = document.querySelector(".lightbox_container");
+const close_lightbox = document.querySelector(".close_lightbox");
+const lightboxMediaBox = document.querySelector(".lightbox_media_box");
+const arrowRight = document.querySelector(".arrow_right");
+const arrowLeft = document.querySelector(".arrow_left");
+let mediaActive = "";
+
+//--------------------------------------------------------------
+//variable recupérant les médias du photographe affichés dans un tableau
+let tableau_medias = [];
+
 fetch("../../data/photographers.json")
   .then((response) => {
     //  then = on attend//
@@ -9,6 +21,10 @@ fetch("../../data/photographers.json")
     const id = urlParams.get("id");
     console.log(id);
     let medias = data.media;
+    tableau_medias = medias.filter((media) => {
+      return id == media.photographerId;
+    });
+    console.log(tableau_medias);
     let photographers = data.photographers;
     console.log(photographers);
     photographers.forEach((photographer) => {
@@ -24,22 +40,11 @@ fetch("../../data/photographers.json")
         `;
       }
     });
-    //-------------VARIABLES LIGHTBOX--------------------------------
-    const bg_lightbox = document.querySelector(".lightbox_container");
-    const close_lightbox = document.querySelector(".close_lightbox");
-    const lightboxMediaBox = document.querySelector(".lightbox_media_box");
-    const arrowRight = document.querySelector(".arrow_right");
-    const arrowLeft = document.querySelector(".arrow_left");
-    let mediaActive = "";
-
-    //--------------------------------------------------------------
-    //variable recupérant les médias du photographe affichés dans un tableau
-    let tableau_medias = [];
 
     //--------------------------LIGHTOX-----------------------------------------
 
     // ouverture lighbox en cliquant sur un media et affichage de ce média
-    function openLightbox() {
+    /* function openLightbox() {
       const links = document.querySelectorAll(".photographerWork");
       console.log(links);
       links.forEach((link, index) => {
@@ -52,6 +57,7 @@ fetch("../../data/photographers.json")
       });
     }
     openLightbox();
+    */
 
     // Fonction qui affiche soit video ou soit photo en fonction du media json dans la lightbox
     function bigMediaLightbox(Elmedia) {
@@ -151,12 +157,11 @@ Il faut aussi faire le compteur de likes global.
     });
 
     let photos = document.querySelectorAll(".photographerWork");
-    photos.forEach((photo) => {
+    photos.forEach((photo, index) => {
       photo.addEventListener("click", (e) => {
         let lightbox = document.querySelector(".lightbox_container");
-        lightbox.style.display = "block";
         mediaActive = index;
-        console.log("123");
+        lightbox.style.display = "block";
         affichageLightbox(tableau_medias[mediaActive]);
 
         /* !! passer lightbox en visible et recuperer le SRC de l'img avec les get Atribute*/
@@ -193,6 +198,7 @@ function choix_media(media) {
       </video>`;
   }
 }
+
 /* function ++ click */
 
 /* +++++++. 14 mars à faire pour la prochaine ++++++
