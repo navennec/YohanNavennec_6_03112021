@@ -31,7 +31,10 @@ fetch("../../data/photographers.json")
     const arrowRight = document.querySelector(".arrow_right");
     const arrowLeft = document.querySelector(".arrow_left");
     let mediaActive = "";
+
     //--------------------------------------------------------------
+    //variable recupérant les médias du photographe affichés dans un tableau
+    let tableau_medias = [];
 
     //--------------------------LIGHTOX-----------------------------------------
 
@@ -77,7 +80,7 @@ fetch("../../data/photographers.json")
           "</h2>"
         );
       }
-    }
+    } //
     //On injecte la fonction qui définira si photo ou video à afficher
     function affichageLightbox(currentMedia) {
       lightboxMediaBox.innerHTML = bigMediaLightbox(currentMedia);
@@ -147,15 +150,38 @@ Il faut aussi faire le compteur de likes global.
       });
     });
 
-    let photos = document.querySelectorAll(".media");
+    let photos = document.querySelectorAll(".photographerWork");
     photos.forEach((photo) => {
       photo.addEventListener("click", (e) => {
-        let lightbox = document.querySelector(".lightbox)");
+        let lightbox = document.querySelector(".lightbox_container");
+        lightbox.style.display = "block";
+        mediaActive = index;
+        console.log("123");
+        affichageLightbox(tableau_medias[mediaActive]);
 
         /* !! passer lightbox en visible et recuperer le SRC de l'img avec les get Atribute*/
       });
     });
   });
+
+function choix_media_lightbox(media) {
+  if (media.image) {
+    return (
+      ` <img class="img-lightbox" src="../../Sample Photos/${media.photographerId}/${media.image}">` +
+      `<h2 class="title-lightbox">${media.title}</h2>`
+    );
+  } else if (media.video) {
+    return (
+      ` <video class="img-lightbox">
+        <source src="../../Sample Photos/${media.photographerId}/${media.video}" type="video/mp4"> 
+        </video>` + `<h2 class="title-lightbox">${media.title}</h2>`
+    );
+  }
+}
+
+function affichageLightbox(currentMedia) {
+  lightboxMediaBox.innerHTML = choix_media_lightbox(currentMedia);
+}
 
 /*.    Avant ligne 36 à la place de choix medi..         <img class="photographerWork" src="../../Sample Photos/${media.photographerId}/${media.image}">  */
 function choix_media(media) {

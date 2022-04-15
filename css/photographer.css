@@ -296,10 +296,10 @@ function extrait(txt, pos) {
   }
   
   .lightbox_container {
-    display: visible;
+    display: none;
     position: fixed;
     z-index: 10;
-    background-color: $couleur_blanche;
+    background-color: white;
     width: 100%;
     height: 100%;
     top: 0px;
@@ -324,8 +324,9 @@ function extrait(txt, pos) {
     border-radius: 0.6rem;
     overflow: hidden;
   
-    img,
-    video {
+    
+  }
+  .lightbox_media_box img {
       margin: auto;
       height: 85%;
       width: 70%;
@@ -333,7 +334,15 @@ function extrait(txt, pos) {
       border-radius: 0.6rem;
       object-fit: cover;
     }
-  }
+    .lightbox_media_box video {
+      margin: auto;
+      height: 85%;
+      width: 70%;
+      position: absolute;
+      border-radius: 0.6rem;
+      object-fit: cover;
+    }
+
   .titre_photo_lightbox {
     position: absolute;
     bottom: 3%;
