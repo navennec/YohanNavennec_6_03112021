@@ -24,6 +24,72 @@ fetch("../../data/photographers.json")
         `;
       }
     });
+    //-------------VARIABLES LIGHTBOX--------------------------------
+    const bg_lightbox = document.querySelector(".lightbox_container");
+    const close_lightbox = document.querySelector(".close_lightbox");
+    const lightboxMediaBox = document.querySelector(".lightbox_media_box");
+    const arrowRight = document.querySelector(".arrow_right");
+    const arrowLeft = document.querySelector(".arrow_left");
+    let mediaActive = "";
+    //--------------------------------------------------------------
+
+    //--------------------------LIGHTOX-----------------------------------------
+
+    // ouverture lighbox en cliquant sur un media et affichage de ce média
+    function openLightbox() {
+      const links = document.querySelectorAll(".photographerWork");
+      console.log(links);
+      links.forEach((link, index) => {
+        link.addEventListener("click", () => {
+          mediaActive = index;
+          console.log("123");
+          bg_lightbox.style.display = "block";
+          affichageLightbox(tableau_medias[mediaActive]);
+        });
+      });
+    }
+    openLightbox();
+
+    // Fonction qui affiche soit video ou soit photo en fonction du media json dans la lightbox
+    function bigMediaLightbox(Elmedia) {
+      if (Elmedia.image) {
+        return (
+          '<img class="media" src="' +
+          Elmedia.image +
+          '" alt="' +
+          Elmedia.alt +
+          '"img>' +
+          '<h2 class="titre_photo_lightbox">' +
+          Elmedia.title +
+          "</h2>"
+        );
+      } else if (Elmedia.video) {
+        return (
+          '<video autoplay loop class="media">' +
+          '<source src="' +
+          Elmedia.video +
+          '" alt="' +
+          Elmedia.alt +
+          '" type=video/mp4>' +
+          "</video> " +
+          '<h2 class="titre_photo_lightbox">' +
+          Elmedia.title +
+          "</h2>"
+        );
+      }
+    }
+    //On injecte la fonction qui définira si photo ou video à afficher
+    function affichageLightbox(currentMedia) {
+      lightboxMediaBox.innerHTML = bigMediaLightbox(currentMedia);
+    }
+
+    // fermeture lightbox au clic sur la croix et on cache le dernier média affiché
+    function CloseLightbox() {
+      close_lightbox.addEventListener("click", () => {
+        bg_lightbox.style.display = "none";
+      });
+    }
+    CloseLightbox();
     /*
     Sélectionner la lightbox et la remettre en display visible
 
@@ -91,7 +157,7 @@ Il faut aussi faire le compteur de likes global.
     });
   });
 
-/*.    Avant ligne 36 à la place de choix medi..       <img class="photographerWork" src="../../Sample Photos/${media.photographerId}/${media.image}">  */
+/*.    Avant ligne 36 à la place de choix medi..         <img class="photographerWork" src="../../Sample Photos/${media.photographerId}/${media.image}">  */
 function choix_media(media) {
   if (media.image) {
     return ` <img class="photographerWork" src="../../Sample Photos/${media.photographerId}/${media.image}">`;
@@ -101,7 +167,6 @@ function choix_media(media) {
       </video>`;
   }
 }
-
 /* function ++ click */
 
 /* +++++++. 14 mars à faire pour la prochaine ++++++
