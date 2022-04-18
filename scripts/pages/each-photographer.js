@@ -88,9 +88,9 @@ fetch("../../data/photographers.json")
       }
     } //
     //On injecte la fonction qui définira si photo ou video à afficher
-    function affichageLightbox(currentMedia) {
+    /* function affichageLightbox(currentMedia) {
       lightboxMediaBox.innerHTML = bigMediaLightbox(currentMedia);
-    }
+    }. */
 
     // fermeture lightbox au clic sur la croix et on cache le dernier média affiché
     function CloseLightbox() {
@@ -177,7 +177,7 @@ function choix_media_lightbox(media) {
     );
   } else if (media.video) {
     return (
-      ` <video class="img-lightbox">
+      ` <video autoplay loop class="img-lightbox">
         <source src="../../Sample Photos/${media.photographerId}/${media.video}" type="video/mp4"> 
         </video>` + `<h2 class="title-lightbox">${media.title}</h2>`
     );
@@ -199,6 +199,30 @@ function choix_media(media) {
   }
 }
 
+// clic fleche droite
+const flecheDroite = function () {
+  mediaActive++;
+  if (mediaActive === tableau_medias.length) {
+    mediaActive = 0;
+  }
+  affichageLightbox(tableau_medias[mediaActive]);
+};
+document
+  .querySelector(".fa-angle-right")
+  .addEventListener("click", function () {
+    flecheDroite();
+  });
+// clic fleche gauche (en arriere---)
+const flecheGauche = function () {
+  mediaActive--;
+  if (mediaActive < 0) {
+    mediaActive = tableau_medias.length - 1;
+  }
+  affichageLightbox(tableau_medias[mediaActive]);
+};
+document.querySelector(".fa-angle-left").addEventListener("click", function () {
+  flecheGauche();
+});
 /* function ++ click */
 
 /* +++++++. 14 mars à faire pour la prochaine ++++++
@@ -306,3 +330,19 @@ mettre la modale contactez moi.
   });
   totalLikes(tableau_medias);
   */
+/* 
+A Faire pour plus tard 
+
+//navigation au clavier, fleches gauche et droite, touche échap pour sortir
+window.addEventListener("keydown", function (e) {
+  if (e.key == "ArrowRight") {
+    displayNext();
+  }
+  if (e.key == "ArrowLeft") {
+    displayPrevious();
+  }
+  if (e.key == "Escape") {
+    bg_lightbox.style.display = "none";
+  }
+});
+*/

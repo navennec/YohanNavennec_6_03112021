@@ -374,18 +374,49 @@ function extrait(txt, pos) {
   }
   
   .close_lightbox {
+    font-size: 3rem;
     right: 12%;
     top: 8%;
+    border-radius: 0.32rem;
+    border: none;
+    color: #901c1c;
+    width: 11.6rem;
+    height: 4.3rem;
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+
   }
   
   .arrow_left {
+    font-size: 2rem;
     left: 10%;
     top: 50%;
+    border-radius: 0.32rem;
+    border: none;
+    color: #901c1c;
+    width: 11.6rem;
+    height: 4.3rem;
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
   }
   
   .arrow_right {
-    right: 10%;
+    font-size: 2rem;
+    right: 0%;
     top: 50%;
+    border-radius: 0.32rem;
+    border: none;
+    color: #901c1c;
+    width: 11.6rem;
+    height: 4.3rem;
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
   }
   
   .hidden {
@@ -395,3 +426,32 @@ function extrait(txt, pos) {
   .lightbox_container.active {
     display: block;
   }
+  .title-lightbox {
+    position: absolute;
+    bottom: 3%;
+    left: 15%;
+    margin: auto;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #901c1c;
+
+
+  }
+  .fa-angle-left {
+    font-size: 5rem;
+    position: fixed;
+    bottom: 50%;
+    left: 5%;
+}
+.fa-angle-right {
+    font-size: 5rem;
+    position: fixed;
+    bottom: 50%;
+    right: 5%;
+}
+.fa-times {
+    font-size: 4rem;
+    position: fixed; 
+    bottom: 85%;
+    right: 5%;
+}
