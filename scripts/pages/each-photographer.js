@@ -41,24 +41,6 @@ fetch("../../data/photographers.json")
       }
     });
 
-    //--------------------------LIGHTOX-----------------------------------------
-
-    // ouverture lighbox en cliquant sur un media et affichage de ce média
-    /* function openLightbox() {
-      const links = document.querySelectorAll(".photographerWork");
-      console.log(links);
-      links.forEach((link, index) => {
-        link.addEventListener("click", () => {
-          mediaActive = index;
-          console.log("123");
-          bg_lightbox.style.display = "block";
-          affichageLightbox(tableau_medias[mediaActive]);
-        });
-      });
-    }
-    openLightbox();
-    */
-
     // Fonction qui affiche soit video ou soit photo en fonction du media json dans la lightbox
     function bigMediaLightbox(Elmedia) {
       if (Elmedia.image) {
@@ -136,7 +118,7 @@ Il faut aussi faire le compteur de likes global.
         <div class="media_coeur">
         <p class="mediaTitle">${
           media.likes
-        }</p><i class="far fa-heart heart"></i>
+        }</p><i class="fa fa-heart heart"></i>
         </div>
         </div>
         </div>
@@ -223,6 +205,22 @@ const flecheGauche = function () {
 document.querySelector(".fa-angle-left").addEventListener("click", function () {
   flecheGauche();
 });
+
+//Injection dans l'html de la bannière des likes totaux et du tarif/jour du photographe
+function totalLikesPriceDay(likesPrice) {
+  //injection de la bannière deslikes totaux
+  let total_likes = document.createElement("span");
+  total_likes.setAttribute("id", "likes");
+  document.querySelector("#likes_price").appendChild(total_likes);
+  total_likes.innerHTML = '<p id="total_likes">';
+  "</p>" + '<i class="far fa-heart total"></i>';
+  /* Ajout du prix du photographe affiché par jour  */
+  let price_day = document.createElement("span");
+  price_day.setAttribute("id", "price_day");
+  document.querySelector("#likes_price").appendChild(price_day);
+  price_day.innerHTML += `${likesPrice.price}€ / jour`;
+}
+
 /* function ++ click */
 
 /* +++++++. 14 mars à faire pour la prochaine ++++++
