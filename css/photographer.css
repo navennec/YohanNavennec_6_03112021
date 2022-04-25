@@ -417,3 +417,6 @@ function extrait(txt, pos) {
   color: black;
   font-weight: 400;
 }
+.btn_submit{
+  margin-top: 2rem;
+}

@@ -221,6 +221,29 @@ function totalLikesPriceDay(likesPrice) {
   price_day.innerHTML += `${likesPrice.price}€ / jour`;
 }
 
+//----------------------FILTRE DROPDOWN-------------------------------
+
+//On écoute au changement de filtre dropdown le choix et on réaffiche les médias en fonction du résultat de popularité, date ou titre
+function filterDropdown() {
+  dropdown.addEventListener("change", function (e) {
+    e.target.value;
+
+    containerMedias.innerHTML = "";
+
+    if (e.target.value == "popularite") {
+      tableau_medias.sort((a, b) => (a.likes > b.likes ? 1 : -1));
+    } else if (e.target.value == "date") {
+      tableau_medias.sort((a, b) => (a.date > b.date ? 1 : -1));
+    } else if (e.target.value == "titre") {
+      tableau_medias.sort((a, b) => (a.title > b.title ? 1 : -1));
+    }
+
+    tableau_medias.forEach((tab) => {
+      media_photographe_display(tab);
+    });
+  });
+}
+filterDropdown();
 /* function ++ click */
 
 /* +++++++. 14 mars à faire pour la prochaine ++++++

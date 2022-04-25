@@ -3,13 +3,15 @@
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/9b28388b6e.js" crossorigin="anonymous"></script>
     <title>Fisheye - Les photographes </title>
   </head>
   <body>
-    <header class="header">
+    <header class="header" role="banner">
       <!--<img src="assets/images/logo.png" class="logo" />-->
       <a class="logo" href="index.html">
         <img class="logo" src="assets/images/logo.png"alt="Fisheye Home page">
@@ -23,11 +25,11 @@
 
       <!-- !!!!! ajout du 01 mars pour les filtres !!!!! -->
       <section class="photographer__selectOption">
-        <label class="selectOption__label">Trier par</label> 
-        <select class="photographer__selectOption--wraper">
-          <option value="popularité">Popularité</option>
-          <option value="date">Date</option>
-          <option value="titre">Titre</option>
+        <label class="selectOption__label" for="trier" aria-label="Order by">Trier par</label> 
+        <select class="photographer__selectOption--wraper"name="trigger" id="trier">
+          <option class="dopdown_list" value="popularite">Popularité</option>
+                <option class="dopdown_list" value="date">Date</option>
+                <option class="dopdown_list" value="titre">Titre</option>
         </select>
        </section>
 
@@ -42,66 +44,47 @@
         <div class="photographerImages">
 
         </div>
-      
-
-          
+  
         </section>
-
-       
        
     </main>
-    <div id="contact_modal">
+    <!--Formulaire de contact-->
+    <div id="contact_modal"role="dialog">
 			<div class="modal">
 				<header>
           <h2 class="title-photographe">Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" onclick="closeModal()" aria-label="Close contact form" />
           <p class="photographer__h1"></p>
         </header>
-				<form>
-					<div>
-						<label for="first">Prénom</label><br>
-            <input
-              class="text-control"
-              type="text"
-              id="first"
-              name="first"
-            /><br>
-                <span class="firstNameErrorMsg hidden">2 caractères ou plus sont demandés</span>
-          </div>
-              <div
-                class="formData">
-                <label for="last">Nom</label><br>
-                <input
-                  class="text-control"
-                  type="text"
-                  id="last"
-                  name="last"
-                /><br>
-                <span class="lastNameErrorMsg hidden">2 caractères ou plus sont demandés</span>
-              </div>
-              <div
-                class="formData">
-                <label for="email">E-mail</label><br>
-                <input
-                  class="text-control"
-                  id="email"
-                  name="email"
-                /><br>
-                <span class="emailErrorMsg hidden">un email valide est demandé</span>
-              </div>
-              <div class="formData">
-              <label for="message">Message</label><br>
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                cols="40"
-              ></textarea>
-            </div>
-          <button class="contact_button">Envoyer</button>
-				</form>
+				<form class="modal_formulaire" id="formulaire" action="pagePhotographe.html" method="get" aria-label="Contact me" novalidate>
+                    
+          <!--Champ prénom-->
+              <label for="prenom">Prénom</label>
+              <input class="text-control"  type="text" id="prenom" aria-label="First name"
+              aria-required="true" name="first name" />
+              <span id="erreur_prenom"></span>
+          <!--Champ prénom-->
+              <label for="nom">Nom</label>
+              <input class="text-control" type="text" id="nom" aria-label="Last name"
+              aria-required="true" name="last"/>
+              <span id="erreur_nom"></span>
+          <!--Champ email-->
+          <label for="email">Email</label>
+          <input class="text-control" type="email" id="email" aria-label="Email"
+          aria-required="true" name="email"/>
+          <span id="erreur_email"></span>
+           <!--Champ message-->
+           <label for="message">Votre message</label>
+           <textarea class="text-control" name="message" id="message" aria-label="Your message"></textarea>
+           <span id="erreur_message"></span>
+          <!--Bouton envoyer-->
+          <button class="btn_submit" type="submit" aria-label="Send">Envoyer</button>
+
+      </form>
+
 			</div>
 		</div>
+         <!--Lightbox-->
     <div class="lightbox_container" role="dialog" aria-label="image closeup view">
       <div class=" lightbox">
         <div class="lightbox_media_box">
