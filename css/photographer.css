@@ -420,3 +420,44 @@ function extrait(txt, pos) {
 .btn_submit{
   margin-top: 2rem;
 }
+#message.text-control {
+  width: 100%;
+  height: 68px;
+  border-radius: 5px;
+}
+
+/* compteur total des likes + $/j */
+#likes_price {
+  display: flex;
+  position: fixed;
+  border-radius: 0.3rem 0.3rem 0 0;
+  align-items: center;
+  background-color: $couleur_bg_scroll;
+  border: none;
+  color: $couleur_noire;
+  font-size: 1.5rem;
+  font-weight: 500;
+  right: 2.5rem;
+  bottom: 0;
+  padding: 0.6rem 2rem 0.6rem 2rem;
+  width: 20vw;
+  height: 5vh;
+}
+
+
+#likes {
+  display: flex;
+
+}
+
+.total {
+  color: $couleur_noire;
+  align-self: center;
+}
+
+#price_day {
+  margin-left: 2rem;
+}
+#likes_prices {
+  color: black;
+}

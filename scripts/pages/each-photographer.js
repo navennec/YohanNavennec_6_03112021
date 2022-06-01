@@ -16,6 +16,7 @@ fetch("../../data/photographers.json")
     return response.json();
   })
   .then((data) => {
+    let arrayMedias = [];
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const id = urlParams.get("id");
@@ -104,6 +105,7 @@ Il faut aussi faire le compteur de likes global.
 
     medias.forEach((media) => {
       if (media.photographerId == id) {
+        arrayMedias.push(media);
         let photographerImages = document.querySelector(".photographerImages");
 
         let mediaDiv = document.createElement("div");
@@ -149,6 +151,28 @@ Il faut aussi faire le compteur de likes global.
         /* !! passer lightbox en visible et recuperer le SRC de l'img avec les get Atribute*/
       });
     });
+    totalLikesPriceDay();
+
+    //Injection dans l'html de la bannière des likes totaux et du tarif/jour du photographe
+function totalLikesPriceDay() {
+  //injection de la bannière deslikes totaux
+  let total_likes = document.createElement("span");
+  total_likes.setAttribute("id", "likes");
+  document.querySelector("#likes_price").appendChild(total_likes);
+  total_likes.innerHTML = '<p id="total_likes">';
+  '</p>' + '<i class="far fa-heart total"></i>';
+  /* Ajout du prix du photographe affiché par jour  */
+  let price_day = document.createElement("span");
+  price_day.setAttribute("id", "price_day");
+  document.querySelector("#likes_price").appendChild(price_day);
+  price_day.innerHTML += `${likesPrice.price}€ / jour`;
+  /*à changer.  price_day.innerHTML += `${likesPrice.price}€ / jour`;
+  faire boucle avec les medias du photographe qui sont dans le arrayMedias
+  dans une variable additionner tous les Likes
+  injecter avec innerHTML le total de likes*/
+  console.log("test");
+}
+
   });
 
 function choix_media_lightbox(media) {
@@ -206,29 +230,18 @@ document.querySelector(".fa-angle-left").addEventListener("click", function () {
   flecheGauche();
 });
 
-//Injection dans l'html de la bannière des likes totaux et du tarif/jour du photographe
-function totalLikesPriceDay(likesPrice) {
-  //injection de la bannière deslikes totaux
-  let total_likes = document.createElement("span");
-  total_likes.setAttribute("id", "likes");
-  document.querySelector("#likes_price").appendChild(total_likes);
-  total_likes.innerHTML = '<p id="total_likes">';
-  "</p>" + '<i class="far fa-heart total"></i>';
-  /* Ajout du prix du photographe affiché par jour  */
-  let price_day = document.createElement("span");
-  price_day.setAttribute("id", "price_day");
-  document.querySelector("#likes_price").appendChild(price_day);
-  price_day.innerHTML += `${likesPrice.price}€ / jour`;
-}
 
 //----------------------FILTRE DROPDOWN-------------------------------
 
 //On écoute au changement de filtre dropdown le choix et on réaffiche les médias en fonction du résultat de popularité, date ou titre
 function filterDropdown() {
+  let dropdown = document.querySelector(".photographer__selectOption--wraper")
   dropdown.addEventListener("change", function (e) {
     e.target.value;
+    containerMedias.querySelector(".photographer__selectOption");
 
     containerMedias.innerHTML = "";
+    
 
     if (e.target.value == "popularite") {
       tableau_medias.sort((a, b) => (a.likes > b.likes ? 1 : -1));
@@ -238,9 +251,8 @@ function filterDropdown() {
       tableau_medias.sort((a, b) => (a.title > b.title ? 1 : -1));
     }
 
-    tableau_medias.forEach((tab) => {
       media_photographe_display(tab);
-    });
+      /* appeler la fonction avec le bon nom */
   });
 }
 filterDropdown();
